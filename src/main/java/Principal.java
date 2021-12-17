@@ -13,23 +13,21 @@ public class Principal {
 
 
     final private Map<Integer, List<Pair<Teacher, Boolean>>> allYearsTeachers = Map.ofEntries(
-            new AbstractMap.SimpleImmutableEntry<>(
-                    2020,
-                    List.of(
-                            new Pair<>( new Teacher(1,"Josefina"), true),
-                            new Pair<>( new Teacher(1,"Edonisio"), true),
-                            new Pair<>( new Teacher(1,"Edufasio"), false)
-                    )
-            ),
-            new AbstractMap.SimpleImmutableEntry<>(
-                    2019,
-                    List.of(
-                            new Pair<>( new Teacher(1,"Eduarda"), false),
-                            new Pair<>( new Teacher(1,"Abelardo"), false),
-                            new Pair<>( new Teacher(1,"Francisca"), false)
-                    )
+        new AbstractMap.SimpleImmutableEntry<>(
+            2020,
+            List.of(new Pair<>( new Teacher(1,"Josefina"), true),
+                    new Pair<>( new Teacher(1,"Edonisio"), true),
+                    new Pair<>( new Teacher(1,"Edufasio"), false)
             )
-    );
+        ),
+        new AbstractMap.SimpleImmutableEntry<>(
+                2019,
+                List.of(new Pair<>( new Teacher(1,"Eduarda"), false),
+                        new Pair<>( new Teacher(1,"Abelardo"), false),
+                        new Pair<>( new Teacher(1,"Francisca"), false)
+                )
+        )
+);
 
 
     public float calculateGrades(final List<Pair<Integer, Float>> examsStudents, final boolean hasReachedMinimumClasses) {
@@ -89,10 +87,13 @@ public class Principal {
         }
         return hasToIncreaseOneExtraPoint;
     }
-    
+
 
     public static void main(String[] args) {
-     System.out.println("Hola");
+
+        System.out.println("hello");
+
+
     }
 
 }

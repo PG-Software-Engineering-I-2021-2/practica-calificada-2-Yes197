@@ -172,4 +172,6 @@ public class PrincipalTest {
 
         Assert.assertEquals(10, studentGradeCalculator.calculateGrades(examsGrades, hasReachedMinimumClasses));
     }
+
+
 }

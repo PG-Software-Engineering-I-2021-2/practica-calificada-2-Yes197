@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Principal.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PracticaCalificada2</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Principal.java</span></div><h1>Principal.java</h1><pre class="source lang-java linenums">import Pair.Pair;
+
+import java.util.AbstractMap;
+import java.util.List;
+import java.util.Map;
+
+public class Principal {
+    private final int yearToCalculate;
+
+<span class="fc" id="L10">    public Principal(int yearToCalculate) {</span>
+<span class="fc" id="L11">        this.yearToCalculate = yearToCalculate;</span>
+<span class="fc" id="L12">    }</span>
+
+
+<span class="fc" id="L15">    final private Map&lt;Integer, List&lt;Pair&lt;Teacher, Boolean&gt;&gt;&gt; allYearsTeachers = Map.ofEntries(</span>
+        new AbstractMap.SimpleImmutableEntry&lt;&gt;(
+<span class="fc" id="L17">            2020,</span>
+<span class="fc" id="L18">            List.of(new Pair&lt;&gt;( new Teacher(1,&quot;Josefina&quot;), true),</span>
+<span class="fc" id="L19">                    new Pair&lt;&gt;( new Teacher(1,&quot;Edonisio&quot;), true),</span>
+<span class="fc" id="L20">                    new Pair&lt;&gt;( new Teacher(1,&quot;Edufasio&quot;), false)</span>
+            )
+        ),
+        new AbstractMap.SimpleImmutableEntry&lt;&gt;(
+<span class="fc" id="L24">                2019,</span>
+<span class="fc" id="L25">                List.of(new Pair&lt;&gt;( new Teacher(1,&quot;Eduarda&quot;), false),</span>
+<span class="fc" id="L26">                        new Pair&lt;&gt;( new Teacher(1,&quot;Abelardo&quot;), false),</span>
+<span class="fc" id="L27">                        new Pair&lt;&gt;( new Teacher(1,&quot;Francisca&quot;), false)</span>
+                )
+        )
+);
+
+
+    public float calculateGrades(final List&lt;Pair&lt;Integer, Float&gt;&gt; examsStudents, final boolean hasReachedMinimumClasses) {
+<span class="fc" id="L34">        return calculate(examsStudents, hasReachedMinimumClasses);</span>
+    }
+
+    private float calculate(List&lt;Pair&lt;Integer, Float&gt;&gt; examsStudents, boolean hasReachedMinimumClasses) {
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (!examsStudents.isEmpty()) {</span>
+<span class="fc" id="L39">            boolean hasToIncreaseOneExtraPoint = false;</span>
+
+<span class="fc" id="L41">            hasToIncreaseOneExtraPoint = isHasToIncreaseOneExtraPoint(hasToIncreaseOneExtraPoint);</span>
+<span class="fc" id="L42">            float gradesSum       = 0f;</span>
+<span class="fc" id="L43">            int   gradesWeightSum = 0;</span>
+
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            for (Pair&lt;Integer, Float&gt; examGrade : examsStudents) {</span>
+<span class="fc" id="L46">                gradesSum += (examGrade.first() * examGrade.second() / 100);</span>
+<span class="fc" id="L47">                gradesWeightSum += examGrade.first();</span>
+<span class="fc" id="L48">            }</span>
+<span class="fc" id="L49">            return calculateExtra(hasReachedMinimumClasses, hasToIncreaseOneExtraPoint, gradesSum, gradesWeightSum);</span>
+        } else {
+<span class="fc" id="L51">            return 0f;</span>
+        }
+    }
+
+
+    private float calculateExtra(boolean hasReachedMinimumClasses, boolean hasToIncreaseOneExtraPoint, float gradesSum, int gradesWeightSum) {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (gradesWeightSum == 100) {</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (hasReachedMinimumClasses) {</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">                if (hasToIncreaseOneExtraPoint) {</span>
+<span class="fc" id="L60">                    return Float.min(10f, gradesSum + 1);</span>
+                } else {
+<span class="nc" id="L62">                    return gradesSum;</span>
+                }
+            } else {
+<span class="fc" id="L65">                return 0f;</span>
+            }
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        } else if (gradesWeightSum &gt; 100) {</span>
+<span class="fc" id="L68">            return -1f;</span>
+        } else {
+<span class="fc" id="L70">            return -2f;</span>
+        }
+    }
+
+    private boolean isHasToIncreaseOneExtraPoint(boolean hasToIncreaseOneExtraPoint) {
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (Map.Entry&lt;Integer, List&lt;Pair&lt;Teacher, Boolean&gt;&gt;&gt; yearlyTeachers : allYearsTeachers.entrySet()) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            if (!(yearToCalculate != yearlyTeachers.getKey())) {</span>
+<span class="fc" id="L77">                List&lt;Pair&lt;Teacher, Boolean&gt;&gt; teachers = yearlyTeachers.getValue();</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">                for (Pair&lt;Teacher, Boolean&gt; teacher : teachers) {</span>
+<span class="pc bpc" id="L79" title="3 of 4 branches missed.">                    if (teacher.first().Sueldo() == 1 &amp;&amp; teacher.second() != true) {</span>
+<span class="nc" id="L80">                        continue;</span>
+                    }
+<span class="fc" id="L82">                    hasToIncreaseOneExtraPoint = true;</span>
+<span class="fc" id="L83">                }</span>
+            } else {
+                continue;
+            }
+<span class="fc" id="L87">        }</span>
+<span class="fc" id="L88">        return hasToIncreaseOneExtraPoint;</span>
+    }
+
+
+    public static void main(String[] args) {
+
+<span class="nc" id="L94">        System.out.println(&quot;hello&quot;);</span>
+
+
+<span class="nc" id="L97">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

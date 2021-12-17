@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+PracticaCalificada2,default,Teacher,20,27,3,1,5,9,5,2,2,2
+PracticaCalificada2,default,Student,33,0,4,0,10,0,5,0,2,0
+PracticaCalificada2,default,Principal,13,216,4,18,4,41,4,13,1,5
+PracticaCalificada2,default,Pair,15,0,0,0,6,0,3,0,3,0
+PracticaCalificada2,Pair,Pair,0,15,0,0,0,6,0,3,0,3

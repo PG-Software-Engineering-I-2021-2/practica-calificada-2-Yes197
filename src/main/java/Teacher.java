@@ -7,6 +7,11 @@ public class Teacher {
     static final int ProfesorTP = 0;
     static final int ProfesorTc = 1;
     static final int administrativo = 2;
+
+    public String getNombre() {
+        return nombre;
+    }
+
     Teacher(int type, String nombre) {
         tipo = type;
         this.nombre = nombre;
